@@ -10,7 +10,7 @@ import { Card, CardContent } from "./ui/card";
 
 function Pricing() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-20  sm:mt-[200px]">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 mt-20 mb-10  sm:mt-[200px]">
       <div className="flex justify-center">
         <div className="hidden sm:block mr-10 -mt-20 -ml-56">
           <Image
@@ -31,7 +31,7 @@ function Pricing() {
       <CarouselContent>
           <CarouselItem >
             <div className="p-1">
-              <Card className="bg-gray-100">
+              <Card className="bg-gray-100 h-[250px] flex items-center justify-center">
                 <CardContent className="flex aspect-square items-center justify-center p-6">
                   <span className="text-6xl font-semibold">ZERO</span>
                 </CardContent>

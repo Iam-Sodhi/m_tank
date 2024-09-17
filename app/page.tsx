@@ -6,6 +6,8 @@ import Eligibilty from "@/components/Eligibilty";
 import Benefits from "@/components/Benefits";
 import Outcome  from "@/components/Outcome";
 import Pricing  from "@/components/Pricing";
+import Success  from "@/components/Success";
+import Last from "@/components/Last";
 
 export default function Home() {
   return (
@@ -24,6 +26,8 @@ export default function Home() {
      <Benefits />
      <Outcome />
      <Pricing />
+     <Success/>
+     <Last />
 
      </>
   );
