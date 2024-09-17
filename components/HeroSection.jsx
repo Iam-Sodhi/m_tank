@@ -17,7 +17,7 @@ function HeroSection() {
             <Button variant="primary" className='text-lg' size="lg">
               <ArrowBigRight className="mr-2 h-4 w-4 hover:translate-x-1" /> Register Now
             </Button>
-            <Button variant="outline" className='text-lg' size="lg">
+            <Button variant="outline" className='text-lg border-t-4' size="lg">
               AI Innovative Program
             </Button>
             </div>
