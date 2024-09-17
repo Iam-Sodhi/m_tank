@@ -6,7 +6,7 @@ import Image from 'next/image'
 function HeroSection() {
   return (
     <div className='flex flex-col sm:flex-row justify-between items-center mt-28 md:mt-16 overflow-x-hidden'>
-   <div className="overflow-hidden absolute -z-10 bottom-[-4rem] -right-[0rem] h-[40rem] w-[10.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
+   <div className="overflow-hidden absolute -z-10 bottom-[-4rem] -right-[0rem] h-[30rem] w-[8.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
 
 
       
