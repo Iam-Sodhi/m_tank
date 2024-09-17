@@ -11,9 +11,9 @@ import Last from "@/components/Last";
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-hidden">
    
-     <div className="h-screen">
+     <div className="h-screen overflow-hidden">
       <Navbar />
        <div className="mx-[30px] sm:mx-[120px] ">
           <HeroSection />
@@ -29,6 +29,6 @@ export default function Home() {
      <Success/>
      <Last />
 
-     </>
+     </div>
   );
 }

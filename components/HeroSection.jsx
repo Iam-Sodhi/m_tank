@@ -5,7 +5,11 @@ import Image from 'next/image'
 
 function HeroSection() {
   return (
-    <div className='flex flex-col sm:flex-row justify-between items-center mt-28 md:mt-16'>
+    <div className='flex flex-col sm:flex-row justify-between items-center mt-28 md:mt-16 overflow-x-hidden'>
+   <div className="overflow-hidden absolute -z-10 bottom-[-4rem] -right-[0rem] h-[40rem] w-[10.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
+
+
+      
         <div className='flex flex-col items-start justify-center space-y-4 sm:max-w-[300px] md:max-w-[580px] -mt-24 sm:-mt-36'>
             <h1 className='text-2xl sm:text-3xl md:text-6xl text-black font-bold'>
                 Think Tank by <span className='text-custom-primary'>Myraa</span> Technologies

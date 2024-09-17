@@ -11,6 +11,7 @@ import { Card, CardContent } from "./ui/card";
 function Pricing() {
   return (
     <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 mt-20 mb-10  sm:mt-[200px]">
+    
       <div className="flex justify-center">
         <div className="hidden sm:block mr-10 -mt-20 -ml-56">
           <Image
