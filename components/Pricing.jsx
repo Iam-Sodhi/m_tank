@@ -43,7 +43,7 @@ function Pricing() {
     </Carousel>
 
     <div className="flex flex-col justify-center items-start">
-        <h3 className="text-black font-semibold text-2xl">Bring your best problem statements</h3>
+        <h3 className="text-black font-semibold text-xl sm:text-2xl">Bring your best problem statements</h3>
         <p className="text-gray-700 font-light">Impact over Volume.</p>
     </div>
       </div>
