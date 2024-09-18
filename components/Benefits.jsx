@@ -7,8 +7,8 @@ import { GiGearHammer } from 'react-icons/gi';
 
 function Benefits() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-10  sm:my-40">
-      <div className="flex flex-col justify-center items-center space-y-4">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center  space-y-12 sm:space-y-24 my-20  sm:my-40">
+      <div className="flex flex-col justify-center items-center space-y-4 text-center">
         <Button variant="outline" className="text-lg border-t-4" size="lg">
           Value Proposition
         </Button>
@@ -19,7 +19,7 @@ function Benefits() {
           Exploring the valuable Benefits of AI Innovation Program Participation
         </p>
       </div>
-      <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center space-x-4 ">
+      <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center sm:space-x-4 ">
         <BCard
           title="Access to Cutting-edge AI Technology and Expertise"
           icon={<BiChat className="text-white h-6 w-6" />}

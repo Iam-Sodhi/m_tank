@@ -9,8 +9,8 @@ import {
 
 function Eligibilty() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-20  sm:mt-[200px]">
-      <div className="flex justify-center">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-12 sm:space-y-24 my-20  sm:mt-[200px]">
+      <div className="flex justify-center text-center">
         <div className="hidden sm:block mr-10 -mt-20 -ml-36">
           <Image
             src="/two-rollers-flipped.svg"
@@ -23,7 +23,7 @@ function Eligibilty() {
           Eligibilty Criteria
         </h2>
       </div>
-      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center space-x-4 ">
+      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center sm:space-x-4 ">
         <ECard
           title="A Compelling Impactful Problem Statement"
           description="A well defined problem statement that can lead to amplified impact with intelligent automation using AI. Impact > Niche."

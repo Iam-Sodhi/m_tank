@@ -4,16 +4,16 @@ import PCard from "@/components/PCard";
 
 function Playground() {
   return (
-    <div className='mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-10  sm:my-40'>
+    <div className='mx-[30px] sm:mx[120px] flex flex-col items-center space-y-12 sm:space-y-24 my-10  sm:my-40'>
         <div className='flex justify-center'>
-             <h2 className='text-black text-3xl md:text-5xl font-bold'>
+             <h2 className='text-black text-center text-3xl md:text-5xl font-bold'>
                 AI Innovative Playground
              </h2>
              <div className='hidden sm:block ml-6 -mt-20 -mr-10'>
                  <Image  src="/two-rollers.svg"  alt="roller" height={250} width={250} />
              </div>
         </div>
-        <div className='flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center space-x-4 '>
+        <div className='flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center sm:space-x-4 '>
             
              <PCard title="Mission" 
              description="Fostering AI experimentation and innovation to drive industry-wide digital transformation."

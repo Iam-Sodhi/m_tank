@@ -4,8 +4,8 @@ import OCard from "@/components/OCard";
 
 function Outcome() {
   return (
-    <div className='mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-10  sm:my-40'>
-        <div className='flex justify-center'>
+    <div className='mx-[30px] sm:mx[120px] flex flex-col items-center space-y-12 sm:space-y-24 my-20  sm:my-40'>
+        <div className='flex justify-center text-center'>
              <h2 className='text-black text-3xl md:text-5xl font-bold'>
                 End Outcome and Impact
              </h2>
@@ -13,7 +13,7 @@ function Outcome() {
                  <Image  src="/two-rollers.svg"  alt="roller" height={250} width={250} />
              </div>
         </div>
-        <div className='flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center space-x-4 '>
+        <div className='flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center sm:space-x-4 '>
             
              <OCard title="Inhouse Innovation" 
              description="Ideas to Inventions, all Inhouse."

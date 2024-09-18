@@ -38,8 +38,8 @@ const structureData = [
 
 export default function ProgramStructure() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-24 my-40">
-      <div className="flex flex-col justify-center items-center space-y-4">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-14 sm:space-y-24 my-40">
+      <div className="flex flex-col justify-center items-center space-y-4 text-center">
       <Button variant="outline" className='text-lg border-t-4' size="lg">
               Program Timeline
             </Button>

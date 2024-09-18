@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Success() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-16 my-20  sm:mt-[150px]">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-12  sm:space-y-16 my-20  sm:mt-[150px]">
       <div className="flex justify-center mt-4">
         <h2 className="text-black text-3xl md:text-5xl font-bold">
           Success Cases & Past Solutions
@@ -15,7 +15,7 @@ export default function Success() {
           <Image src="/two-rollers.svg" alt="roller" height={250} width={250} />
         </div>
       </div>
-      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center space-x-4 ">
+      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center sm:space-x-4 ">
         <SCard
           title="Healthcare"
           points={[

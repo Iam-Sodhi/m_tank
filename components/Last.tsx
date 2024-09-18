@@ -4,8 +4,8 @@ import Image from "next/image";
 
 function Last() {
   return (
-    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-16 my-10  sm:my-32">
-      <div className="flex flex-col justify-center items-center space-y-4">
+    <div className="mx-[30px] sm:mx[120px] flex flex-col items-center space-y-16 my-20  sm:my-32">
+      <div className="flex flex-col justify-center items-center space-y-4 text-center">
         <Button variant="outline" className="text-lg border-t-4" size="lg">
           Register Now
         </Button>
