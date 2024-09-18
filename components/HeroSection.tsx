@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
+import toast from "react-hot-toast";
 import { ArrowBigRight } from "lucide-react";
 import Image from "next/image";
 import {
@@ -26,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
 const industryOptions = [
   "automotive",
   "banking",
@@ -64,6 +65,8 @@ const formSchema = z.object({
 
 function HeroSection() {
   // const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter();
+ 
   // const toggleEdit = () => setIsEditing((current) => !current);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -82,6 +85,16 @@ function HeroSection() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+
+    try {
+      // await axios.post(`/api/courses/${courseId}/announcements`, values);
+      toast.success("Announcement Added");
+      form.reset();
+      // toggleEdit();
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    }
   }
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center mt-16 overflow-x-hidden">
@@ -103,7 +116,7 @@ function HeroSection() {
                 Register Now
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-lg md:max-w-xl bg-white">
+            <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white">
               <DialogHeader>
                 <DialogTitle>Think Tank by Myraa Technologies </DialogTitle>
                 <DialogDescription>
@@ -130,7 +143,7 @@ function HeroSection() {
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage  />
                         </FormItem>
                       )}
                     />
