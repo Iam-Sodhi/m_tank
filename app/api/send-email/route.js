@@ -24,8 +24,7 @@ export async function POST(req) {
 // Function to send emails using Nodemailer
 async function sendEmails({ firstName, lastName, companyName, officialEmail, industry }) {
   console.log("in sending email")
-  console.log("password: ", process.env.SMTP_PASSWORD)
-  console.log("user: ", process.env.SMTP_USER)
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
