@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -66,6 +66,7 @@ const formSchema = z.object({
 function HeroSection() {
   // const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
+  const [formVisible, setFormVisible] = useState(true); 
  
   // const toggleEdit = () => setIsEditing((current) => !current);
   const form = useForm({
@@ -81,27 +82,55 @@ function HeroSection() {
   });
   const { isSubmitting, isValid } = form.formState;
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+//  async function onSubmit(values: z.infer<typeof formSchema>) {
+//     // Do something with the form values.
+//     // ✅ This will be type-safe and validated.
+//     console.log(values);
 
-    try {
-      // await axios.post(`/api/courses/${courseId}/announcements`, values);
-      toast.success("Announcement Added");
-      form.reset();
-      // toggleEdit();
-      router.refresh();
-    } catch {
-      toast.error("Something went wrong");
+//     try {
+//       // to send the form data over to  owner: gautamsodhi111@gmail.com   and user: (as provided in form)
+//       toast.success("Announcement Added");
+//       form.reset();
+//       // toggleEdit();
+//       router.refresh();
+//     } catch {
+//       toast.error("Something went wrong");
+//     }
+//   }
+async function onSubmit(values: z.infer<typeof formSchema>) {
+  try {
+    // Send the form data to the API endpoint.
+    const response = await fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values), // Send the form data as JSON
+    });
+    console.log(response)
+    // Check if the request was successful
+    if (response.ok) {
+      setFormVisible(false); // Hide the form
+      console.log("successfully sent email")
+      toast.success("Emails sent successfully!");
+      form.reset(); // Reset the form if successful
+      router.refresh(); // Refresh the page (if needed)
+      
+    } else {
+      toast.error("Failed to send emails.");
     }
+    // setFormVisible(true)
+  } catch (error) {
+    console.error("Error sending email:", error);
+    toast.error("Something went wrong. Please try again.");
   }
+}
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center mt-16 overflow-x-hidden">
-      <div className="overflow-hidden absolute -z-10 bottom-[-4rem] -right-[0rem] h-[30rem] w-[8.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
+      <div className=" hidden overflow-hidden sm:absolute -z-10 bottom-[-4rem] -right-[0rem] h-[30rem] w-[8.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
 
-      <div className="flex flex-col items-start justify-center space-y-4 sm:max-w-[300px] md:max-w-[580px]  sm:-mt-36">
-        <h1 className="text-2xl sm:text-3xl md:text-6xl text-black font-bold">
+      <div className="flex flex-col items-center sm:items-start justify-center space-y-4 sm:max-w-[300px] md:max-w-[580px]  sm:-mt-36">
+        <h1 className="text-2xl sm:text-3xl md:text-6xl text-center sm:text-start text-black font-bold">
           Think Tank by <span className="text-custom-primary">Myraa</span>{" "}
           Technologies
         </h1>
@@ -109,16 +138,16 @@ function HeroSection() {
           Future Proof Your Business
         </p>
         <div className="flex flex-col md:flex-row  space-y-3 md:space-y-0 sm:space-x-4 justify-center items-start sm:items-center pt-4">
-          <Dialog>
+         {formVisible && <Dialog>
             <DialogTrigger asChild>
               <Button variant="primary" className="text-lg" size="lg">
                 <ArrowBigRight className="mr-2 h-4 w-4 hover:translate-x-1" />{" "}
                 Register Now
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white">
+            <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white overflow-y-auto max-h-[90vh]">
               <DialogHeader>
-                <DialogTitle>Think Tank by Myraa Technologies </DialogTitle>
+                <DialogTitle className="text-black">Think Tank by Myraa Technologies </DialogTitle>
                 <DialogDescription>
                 Please register your interest and our team shall get in touch with you to collect more details and initiate the next steps.
                 </DialogDescription>
@@ -127,7 +156,7 @@ function HeroSection() {
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-3"
+                    className="space-y-1 sm:space-y-3"
                   >
                     {/* First Name Field */}
                     <FormField
@@ -135,10 +164,11 @@ function HeroSection() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name</FormLabel>
+                          <FormLabel className="text-black">First Name</FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
+                              className="text-black"
                               placeholder="First Name"
                               {...field}
                             />
@@ -154,10 +184,11 @@ function HeroSection() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name</FormLabel>
+                          <FormLabel className="text-black">Last Name</FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
+                              className="text-black"
                               placeholder="Last Name"
                               {...field}
                             />
@@ -173,10 +204,11 @@ function HeroSection() {
                       name="companyName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Company Name</FormLabel>
+                          <FormLabel className="text-black">Company Name</FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
+                              className="text-black"
                               placeholder="Company Name"
                               {...field}
                             />
@@ -191,10 +223,11 @@ function HeroSection() {
                       name="officialEmail"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Official Email</FormLabel>
+                          <FormLabel className="text-black">Official Email</FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
+                              className="text-black"
                               placeholder="Email"
                               type="email"
                               {...field}
@@ -210,12 +243,12 @@ function HeroSection() {
                       name="industry"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Industry</FormLabel>
-                          <FormControl>
+                          <FormLabel className="text-black">Industry</FormLabel>
+                          <FormControl >
                             <select
                               {...field}
                               disabled={isSubmitting}
-                              className="w-full border rounded-md p-2"
+                              className="w-full border rounded-md p-2 text-black"
                             >
                               <option value="">Choose</option>
                               <option value="automotive">Automotive</option>
@@ -270,7 +303,7 @@ function HeroSection() {
                             />
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel>
+                            <FormLabel className="text-black">
                             By submitting this form, you express your intent to explore an AI solution for a meaningful problem in your organization.
                             </FormLabel>
                             
@@ -289,17 +322,19 @@ function HeroSection() {
               </div>
             </DialogContent>
           </Dialog>
+                    }
           <Button variant="outline" className="text-md sm:text-lg border-t-4" size="lg">
             AI Innovative Program
           </Button>
         </div>
       </div>
-      <div className="min-w-[300px] mt-5 sm:mt-0">
+      <div className="min-w-[300px] ">
         <Image
           src="/hero-image.svg"
           alt="hero-image"
           height={500}
           width={600}
+          className="my-5 sm:mt-0"
         />
       </div>
     </div>
