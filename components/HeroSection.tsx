@@ -338,7 +338,6 @@ function HeroSection() {
                       ) : (
                         "Submit"
                       )}
-                      Submit
                     </Button>
                     {/* <FormDescription>
                         This is your public display name.
