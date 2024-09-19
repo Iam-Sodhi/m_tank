@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -9,8 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import toast from "react-hot-toast";
-import { ArrowBigRight } from "lucide-react";
+import { toast } from "sonner";
+
+// import toast from "react-hot-toast";
+import { ArrowBigRight, Loader } from "lucide-react";
 import Image from "next/image";
 import {
   Form,
@@ -26,7 +28,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 const industryOptions = [
   "automotive",
   "banking",
@@ -65,9 +67,9 @@ const formSchema = z.object({
 
 function HeroSection() {
   // const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const [formVisible, setFormVisible] = useState(true); 
- 
+  // const router = useRouter();
+  // const [formVisible, setFormVisible] = useState(true);
+
   // const toggleEdit = () => setIsEditing((current) => !current);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -82,49 +84,50 @@ function HeroSection() {
   });
   const { isSubmitting, isValid } = form.formState;
   // 2. Define a submit handler.
-//  async function onSubmit(values: z.infer<typeof formSchema>) {
-//     // Do something with the form values.
-//     // ✅ This will be type-safe and validated.
-//     console.log(values);
+  //  async function onSubmit(values: z.infer<typeof formSchema>) {
+  //     // Do something with the form values.
+  //     // ✅ This will be type-safe and validated.
+  //     console.log(values);
 
-//     try {
-//       // to send the form data over to  owner: gautamsodhi111@gmail.com   and user: (as provided in form)
-//       toast.success("Announcement Added");
-//       form.reset();
-//       // toggleEdit();
-//       router.refresh();
-//     } catch {
-//       toast.error("Something went wrong");
-//     }
-//   }
-async function onSubmit(values: z.infer<typeof formSchema>) {
-  try {
-    // Send the form data to the API endpoint.
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values), // Send the form data as JSON
-    });
-    console.log(response)
-    // Check if the request was successful
-    if (response.ok) {
-      setFormVisible(false); // Hide the form
-      console.log("successfully sent email")
-      toast.success("Emails sent successfully!");
-      form.reset(); // Reset the form if successful
-      router.refresh(); // Refresh the page (if needed)
-      
-    } else {
-      toast.error("Failed to send emails.");
+  //     try {
+  //       // to send the form data over to  owner: gautamsodhi111@gmail.com   and user: (as provided in form)
+  //       toast.success("Announcement Added");
+  //       form.reset();
+  //       // toggleEdit();
+  //       router.refresh();
+  //     } catch {
+  //       toast.error("Something went wrong");
+  //     }
+  //   }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      // Send the form data to the API endpoint.
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values), // Send the form data as JSON
+      });
+      console.log(response);
+      // Check if the request was successful
+      if (response.ok) {
+        // setFormVisible(false); // Hide the form
+        console.log("successfully sent email");
+        toast("Event has been created.");
+
+        // toast.success("Emails sent successfully!");
+        form.reset(); // Reset the form if successful
+        window.location.reload();
+      } else {
+        toast.error("Failed to send emails.");
+      }
+      // setFormVisible(true)
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Something went wrong. Please try again.");
     }
-    // setFormVisible(true)
-  } catch (error) {
-    console.error("Error sending email:", error);
-    toast.error("Something went wrong. Please try again.");
   }
-}
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center mt-16 overflow-x-hidden">
       <div className=" hidden overflow-hidden sm:absolute -z-10 bottom-[-4rem] -right-[0rem] h-[30rem] w-[8.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] bg-gradient-to-r from-blue-100 to-violet-400 "></div>
@@ -138,7 +141,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
           Future Proof Your Business
         </p>
         <div className="flex flex-col md:flex-row  space-y-3 md:space-y-0 sm:space-x-4 justify-center items-start sm:items-center pt-4">
-         {formVisible && <Dialog>
+          <Dialog>
             <DialogTrigger asChild>
               <Button variant="primary" className="text-lg" size="lg">
                 <ArrowBigRight className="mr-2 h-4 w-4 hover:translate-x-1" />{" "}
@@ -147,9 +150,12 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
             </DialogTrigger>
             <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white overflow-y-auto max-h-[90vh]">
               <DialogHeader>
-                <DialogTitle className="text-black">Think Tank by Myraa Technologies </DialogTitle>
+                <DialogTitle className="text-black">
+                  Think Tank by Myraa Technologies{" "}
+                </DialogTitle>
                 <DialogDescription>
-                Please register your interest and our team shall get in touch with you to collect more details and initiate the next steps.
+                  Please register your interest and our team shall get in touch
+                  with you to collect more details and initiate the next steps.
                 </DialogDescription>
               </DialogHeader>
               <div className="flex items-center space-x-2">
@@ -164,7 +170,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-black">First Name</FormLabel>
+                          <FormLabel className="text-black">
+                            First Name
+                          </FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
@@ -173,7 +181,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage  />
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -184,7 +192,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-black">Last Name</FormLabel>
+                          <FormLabel className="text-black">
+                            Last Name
+                          </FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
@@ -204,7 +214,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                       name="companyName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-black">Company Name</FormLabel>
+                          <FormLabel className="text-black">
+                            Company Name
+                          </FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
@@ -223,7 +235,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                       name="officialEmail"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-black">Official Email</FormLabel>
+                          <FormLabel className="text-black">
+                            Official Email
+                          </FormLabel>
                           <FormControl>
                             <Input
                               disabled={isSubmitting}
@@ -244,7 +258,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-black">Industry</FormLabel>
-                          <FormControl >
+                          <FormControl>
                             <select
                               {...field}
                               disabled={isSubmitting}
@@ -284,8 +298,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                             </select>
                           </FormControl>
                           <FormDescription>
-                          Choose &apos;Other&apos; if you cannot find the closest match.
-                </FormDescription>
+                            Choose &apos;Other&apos; if you cannot find the
+                            closest match.
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -304,14 +319,25 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                           </FormControl>
                           <div className="space-y-1 leading-none">
                             <FormLabel className="text-black">
-                            By submitting this form, you express your intent to explore an AI solution for a meaningful problem in your organization.
+                              By submitting this form, you express your intent
+                              to explore an AI solution for a meaningful problem
+                              in your organization.
                             </FormLabel>
-                            
                           </div>
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" variant="primary" disabled={!isValid || isSubmitting}>
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      disabled={!isValid || isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        // <span className="loader"></span> // Spinner icon or component
+                        <Loader className="animate-spin h-4 w-4 mr-2 text-white" />
+                      ) : (
+                        "Submit"
+                      )}
                       Submit
                     </Button>
                     {/* <FormDescription>
@@ -322,8 +348,11 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               </div>
             </DialogContent>
           </Dialog>
-                    }
-          <Button variant="outline" className="text-md sm:text-lg border-t-4" size="lg">
+          <Button
+            variant="outline"
+            className="text-md sm:text-lg border-t-4"
+            size="lg"
+          >
             AI Innovative Program
           </Button>
         </div>
