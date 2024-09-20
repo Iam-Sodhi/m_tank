@@ -26,6 +26,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast"
+import { Textarea } from "./ui/textarea";
+import Link from "next/link";
 
 const industryOptions = [
     "automotive",
@@ -114,7 +116,7 @@ export default function Registration_Form() {
         Register Now
       </Button>
     </DialogTrigger>
-    <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white overflow-y-auto max-h-[90vh]">
+    <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white overflow-y-auto max-h-[95vh]">
       <DialogHeader>
         <DialogTitle className="text-black">
           Think Tank by Myraa Technologies{" "}
@@ -128,7 +130,7 @@ export default function Registration_Form() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-1 sm:space-y-3"
+            className="space-y-1 sm:space-y-2"
           >
             {/* First Name Field */}
             <FormField
@@ -271,6 +273,30 @@ export default function Registration_Form() {
                 </FormItem>
               )}
             />
+
+                  {/* Problem Statement Field (TextArea) */}
+                  <FormField
+                control={form.control}
+                name="problemStatement"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black">
+                      What is the problem that you are trying to solve? (Max 500 words)
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Describe the problem..."
+                        disabled={isSubmitting}
+                        className="text-black h-6"
+                        rows={6} // Adjust the number of rows if needed
+                      />
+                    </FormControl>
+                    {/* <FormDescription>Max 500 words.</FormDescription> */}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             {/* Consent Checkbox */}
             <FormField
               control={form.control}
@@ -285,9 +311,9 @@ export default function Registration_Form() {
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel className="text-black">
-                      By submitting this form, you express your intent
-                      to explore an AI solution for a meaningful problem
-                      in your organization.
+                    By submitting this form, you agree to our  
+                    <Link href="/terms" className="text-custom-primary"> Terms of Service </Link> 
+                     and <Link href="/privacy" className="text-custom-primary"> Privacy Policy </Link>  . You also agree to receive product-related marketing emails from Myraa.
                     </FormLabel>
                   </div>
                 </FormItem>
