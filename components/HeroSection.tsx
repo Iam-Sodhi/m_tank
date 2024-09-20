@@ -20,7 +20,7 @@ function HeroSection() {
           Future Proof Your Business
         </p>
         <div className="flex flex-col md:flex-row  space-y-3 md:space-y-0 sm:space-x-4 justify-center items-start sm:items-center pt-4">
-         <Registration_Form />
+         <Registration_Form outline="false" />
           <Button
             variant="outline"
             className="text-md sm:text-lg border-t-4"

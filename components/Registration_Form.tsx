@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {  useForm } from "react-hook-form";
+import {  z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast"
 import { Textarea } from "./ui/textarea";
@@ -69,7 +69,12 @@ const industryOptions = [
       .refine((val) => val === true, "You must agree to explore an AI solution."),
   });
   
-export default function Registration_Form() {
+type FormProps={
+  outline: string
+}
+export default function Registration_Form({
+  outline: string
+}: FormProps) {
     const { toast } = useToast()
     const form = useForm({
       resolver: zodResolver(formSchema),
@@ -111,10 +116,16 @@ export default function Registration_Form() {
   return (
     <Dialog>
     <DialogTrigger asChild>
+        {string==="false"?
       <Button variant="primary" className="text-lg" size="lg">
         <ArrowBigRight className="mr-2 h-4 w-4 hover:translate-x-1" />{" "}
         Register Now
+      </Button> :
+        <Button variant="outline" className="text-lg border-t-4" size="lg">
+        Register Now
       </Button>
+
+        }
     </DialogTrigger>
     <DialogContent className="max-w-xs sm:max-w-lg md:max-w-xl bg-white overflow-y-auto max-h-[95vh]">
       <DialogHeader>
